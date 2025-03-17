@@ -1,0 +1,4 @@
+de\exxcellent\challenge\App.class
+de\exxcellent\challenge\processing\DataProcessor.class
+de\exxcellent\challenge\reader\DataReader.class
+de\exxcellent\challenge\reader\CSVDataReader.class
