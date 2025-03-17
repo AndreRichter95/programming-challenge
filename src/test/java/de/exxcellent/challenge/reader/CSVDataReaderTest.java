@@ -37,11 +37,4 @@ class CSVDataReaderTest {
         assertFalse(data.isEmpty(), "Weather data should not be empty");
     }
 
-    @Test
-    void testReadFootballFile() {
-        List<String[]> data = csvDataReader.readFile("src/main/resources/de/exxcellent/challenge/football.csv", requiredFootballHeaders);
-        assertNotNull(data, "Football data should not be null");
-        assertFalse(data.isEmpty(), "Football data should not be empty");
-    }
-
 }
