@@ -1,5 +1,6 @@
 package de.exxcellent.challenge;
 
+import de.exxcellent.challenge.processing.DataProcessor;
 import de.exxcellent.challenge.reader.CSVDataReader;
 
 import java.util.Arrays;
@@ -36,7 +37,8 @@ public final class App {
 
             List<String> requiredHeaders = Arrays.asList(Constants.DAY, Constants.MXT, Constants.MNT);
             List<String[]> allWeatherData = csvDataReader.readFile(fileLocation, requiredHeaders);
-            System.out.printf("Day with smallest temperature spread : %s%n", "2");
+            int dayWithSmallestTempSpread = DataProcessor.calculateLowestTemperaturSpread(allWeatherData);
+            System.out.printf("Day with smallest temperature spread : %s%n", dayWithSmallestTempSpread);
         }
         else if (processorType.equals("--football"))
         {
@@ -44,7 +46,8 @@ public final class App {
 
             List<String> requiredHeaders = Arrays.asList(Constants.TEAM,Constants.GOALS,Constants.GOALS_ALLOWED);
             List<String[]> allFootballData = csvDataReader.readFile(fileLocation, requiredHeaders);
-            System.out.printf("Team with smallest goal spread       : %s%n", "Team C");
+            String teamWithSmallestGoalSpread = DataProcessor.calculateLowestGoalDifferencePerTeam(allFootballData);
+            System.out.printf("Team with smallest goal spread       : %s%n", teamWithSmallestGoalSpread);
         }
         else
         {

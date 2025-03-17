@@ -25,4 +25,16 @@ class DataProcessorTest {
         assertEquals(2, result, "Day with smallest temperature spread should be 2");
     }
 
+    @Test
+    void testCalculateGoals() {
+        List<String[]> footballData = Arrays.asList(
+                new String[]{"TEAM", "GOALS", "GOALS ALLOWED"},
+                new String[]{"Team A", "29", "24"},
+                new String[]{"Team B", "23", "21"},
+                new String[]{"Team C", "11", "11"}
+        );
+        String result = DataProcessor.calculateLowestGoalDifferencePerTeam(footballData);
+        assertEquals("Team C", result, "Team with smallest goal difference should be Team C");
+    }
+
 }

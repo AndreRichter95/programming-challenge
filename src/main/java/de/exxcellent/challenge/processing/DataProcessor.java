@@ -53,4 +53,50 @@ public class DataProcessor {
         return lowestSpreadDay;
     }
 
+    /**
+     * Calculates the team with the smallest goal difference from the provided data.
+     * The data is filtered and compared using predefined headers.
+     *
+     * @param data - The processed data from the CSVReader
+     * @return lowestDifferenceTeam - The team with the smallest goal difference
+     * @throws IllegalArgumentException
+     */
+    public static String calculateLowestGoalDifferencePerTeam(List<String[]> data) {
+        int indexTeam, indexGoals, indexGoalsAllowed;
+        int lowestDifference = Integer.MAX_VALUE;
+        String lowestDifferenceTeam = "";
+
+        Map<String, Integer> headerIndexMap = new HashMap<>();
+        String[] header = data.get(0);
+
+        for (int a = 0; a < header.length; a++) {
+            headerIndexMap.put(header[a].toUpperCase(), a);
+        }
+
+        indexTeam = headerIndexMap.get(Constants.TEAM);
+        indexGoals = headerIndexMap.get(Constants.GOALS);
+        indexGoalsAllowed = headerIndexMap.get(Constants.GOALS_ALLOWED);
+
+        for (int i = 1; i < data.size(); i++) {
+            String[] dataLine = data.get(i);
+
+            try {
+                String team = dataLine[indexTeam];
+                int goals = Integer.parseInt(dataLine[indexGoals]);
+                int goalsAllowed = Integer.parseInt(dataLine[indexGoalsAllowed]);
+
+                int goalDifference = Math.abs(goals - goalsAllowed);
+
+                if (lowestDifference > goalDifference) {
+                    lowestDifference = goalDifference;
+                    lowestDifferenceTeam = team;
+                }
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("Invalid number format in line " + i);
+            }
+        }
+
+        return lowestDifferenceTeam;
+    }
+
 }
